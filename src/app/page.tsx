@@ -14,7 +14,32 @@ const ActionButton = ({ icon, label }: { icon: React.ReactNode, label: string })
   </div>
 );
 
-export default function Home() {
+interface AccountData {
+  "account-id": string;
+  balance: number;
+}
+
+async function getAccountData(): Promise<AccountData> {
+  try {
+    const response = await fetch("https://pos.promptnow.com:13443/pos_pn/elephant/mcard/account.php", { cache: 'no-store' });
+    if (!response.ok) {
+        console.error('Failed to fetch account data, status:', response.status);
+        return { "account-id": 'Loading...', balance: 0 };
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching account data:", error);
+    return { "account-id": 'Error', balance: 0 };
+  }
+}
+
+
+export default async function Home() {
+  const accountData = await getAccountData();
+  const accountId = accountData?.['account-id'] || 'N/A';
+  const balance = accountData?.balance || 0;
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       <header className="bg-gradient-to-br from-primary via-purple-600 to-accent text-white p-6 pb-28 rounded-b-[2.5rem]">
@@ -22,7 +47,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold text-center mb-4 text-white/90">Account</h1>
           <div className="flex items-center justify-center gap-2 text-lg">
             <span className="font-light text-white/80">Account ID</span>
-            <span className="font-semibold tracking-wider">12345 12345 12345</span>
+            <span className="font-semibold tracking-wider">{accountId}</span>
             <Button variant="ghost" size="icon" className="h-6 w-6 text-white/80 hover:bg-white/20 rounded-full">
               <Copy className="h-4 w-4" />
             </Button>
@@ -32,7 +57,7 @@ export default function Home() {
       
       <main className="container mx-auto max-w-md -mt-24 px-4">
         <div className="flex gap-4 items-stretch mb-6">
-          <BalanceCard />
+          <BalanceCard balance={balance} />
           <div className="flex-shrink-0">
             <Button variant="secondary" className="h-full w-24 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 bg-white hover:bg-gray-100">
               <QrCode className="h-12 w-12 text-primary" />

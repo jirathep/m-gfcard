@@ -19,8 +19,8 @@ export const RedCardIcon = ({ withPlus = false, className = '' }: { withPlus?: b
 );
 
 
-export function BalanceCard() {
-    const currentBalance = 17639.50;
+export function BalanceCard({ balance }: { balance: number }) {
+    const currentBalance = balance;
 
     return (
         <Card className="shadow-lg rounded-2xl w-full">
