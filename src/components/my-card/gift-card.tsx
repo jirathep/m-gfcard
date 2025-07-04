@@ -30,7 +30,7 @@ export function GiftCard({ value, valueText, thaiText, imageUrl, dataAiHint, isP
         data-ai-hint={dataAiHint}
       />
       <div className="absolute inset-0 bg-black/20 z-10"></div>
-      <div className="relative z-20 p-6 flex flex-col justify-between h-full">
+      <div className="relative z-20 p-6 pb-9 flex flex-col justify-between h-full">
         <div className="text-right">
           <p className="font-light tracking-widest text-sm">GIFT CARD</p>
         </div>
