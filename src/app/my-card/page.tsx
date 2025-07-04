@@ -30,7 +30,7 @@ export default function MyCardPage() {
                   isPrimary={card.isPrimary}
                 />
               </Link>
-              <Button variant="destructive" className="w-full mt-2">
+              <Button variant="destructive" className="w-full mt-2 hidden">
                 Delete
               </Button>
             </div>
