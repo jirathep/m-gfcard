@@ -35,7 +35,7 @@ export default function Home() {
           <BalanceCard />
           <div className="flex-shrink-0">
             <Button variant="secondary" className="h-full w-24 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 bg-white hover:bg-gray-100">
-              <QrCode className="h-10 w-10 text-primary" />
+              <QrCode className="h-12 w-12 text-primary" />
             </Button>
           </div>
         </div>
