@@ -78,7 +78,7 @@ export function TopUpDialog() {
     }}>
       <DialogTrigger asChild>
         <Button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground">
-          <Plus className="mr-2 h-4 w-4" /> Top-Up Balance
+          <Plus className="mr-2 h-4 w-4" /> Top up
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
