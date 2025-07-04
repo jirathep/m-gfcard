@@ -2,8 +2,9 @@ import { BalanceCard, RedCardIcon } from "@/components/dashboard/balance-card";
 import { TransactionHistory } from "@/components/dashboard/transaction-history";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
-import { Copy, QrCode } from "lucide-react";
+import { QrCode } from "lucide-react";
 import Link from "next/link";
+import { AccountHeader } from "@/components/dashboard/account-header";
 
 const ActionButton = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
   <div className="flex flex-col items-center gap-2 text-center w-20">
@@ -45,16 +46,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       <header className="bg-gradient-to-br from-primary via-purple-600 to-accent text-white p-6 pb-28 rounded-b-[2.5rem]">
-        <div className="container mx-auto max-w-md">
-          <h1 className="text-2xl font-bold text-center mb-4 text-white/90">Account</h1>
-          <div className="flex items-center justify-center gap-2 text-lg">
-            <span className="font-light text-white/80">Account ID</span>
-            <span className="font-semibold tracking-wider">{accountId}</span>
-            <Button variant="ghost" size="icon" className="h-6 w-6 text-white/80 hover:bg-white/20 rounded-full">
-              <Copy className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
+        <AccountHeader accountId={accountId} />
       </header>
       
       <main className="container mx-auto max-w-md -mt-24 px-4">
