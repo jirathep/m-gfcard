@@ -1,3 +1,5 @@
+'use client';
+
 import { BalanceCard, RedCardIcon } from "@/components/dashboard/balance-card";
 import { TransactionHistory } from "@/components/dashboard/transaction-history";
 import { Button } from "@/components/ui/button";
@@ -5,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { QrCode } from "lucide-react";
 import Link from "next/link";
 import { AccountHeader } from "@/components/dashboard/account-header";
+import { useState, useEffect, useCallback } from "react";
 
 const ActionButton = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
   <div className="flex flex-col items-center gap-2 text-center w-20">
@@ -37,11 +40,24 @@ async function getAccountData(): Promise<AccountData> {
 }
 
 
-export default async function Home() {
-  const accountData = await getAccountData();
-  const accountId = accountData?.['account-id'] || 'N/A';
+export default function Home() {
+  const [accountData, setAccountData] = useState<AccountData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchAndUpdateData = useCallback(async () => {
+    setIsLoading(true);
+    const data = await getAccountData();
+    setAccountData(data);
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchAndUpdateData();
+  }, [fetchAndUpdateData]);
+
+  const accountId = accountData?.['account-id'] || 'Loading...';
   const balance = accountData?.balance || 0;
-  const lastUpdated = accountData?.datetime || '';
+  const lastUpdated = accountData?.datetime || '...';
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
@@ -51,7 +67,12 @@ export default async function Home() {
       
       <main className="container mx-auto max-w-md -mt-24 px-4">
         <div className="flex gap-4 items-stretch mb-6">
-          <BalanceCard balance={balance} lastUpdated={lastUpdated} />
+          <BalanceCard
+            balance={balance}
+            lastUpdated={lastUpdated}
+            onRefresh={fetchAndUpdateData}
+            isLoading={isLoading}
+          />
           <div className="flex-shrink-0">
             <Button variant="secondary" className="h-full w-24 rounded-2xl shadow-lg flex flex-col items-center justify-center gap-1 bg-white hover:bg-gray-100">
               <QrCode className="h-12 w-12 text-primary" />

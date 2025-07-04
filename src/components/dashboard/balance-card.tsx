@@ -1,5 +1,8 @@
+'use client';
+
 import { Card, CardContent } from "@/components/ui/card";
 import { RefreshCw } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export const RedCardIcon = ({ withPlus = false, className = '' }: { withPlus?: boolean, className?: string }) => (
     <div className={`relative inline-block ${className}`}>
@@ -19,7 +22,7 @@ export const RedCardIcon = ({ withPlus = false, className = '' }: { withPlus?: b
 );
 
 
-export function BalanceCard({ balance, lastUpdated }: { balance: number, lastUpdated: string }) {
+export function BalanceCard({ balance, lastUpdated, onRefresh, isLoading }: { balance: number; lastUpdated: string; onRefresh: () => void; isLoading: boolean; }) {
     const currentBalance = balance;
 
     return (
@@ -36,10 +39,14 @@ export function BalanceCard({ balance, lastUpdated }: { balance: number, lastUpd
                         </p>
                     </div>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-muted-foreground mt-4">
-                    <RefreshCw className="h-3 w-3" />
+                <button
+                    onClick={onRefresh}
+                    disabled={isLoading}
+                    className="flex items-center gap-2 text-xs text-muted-foreground mt-4 disabled:opacity-70"
+                >
+                    <RefreshCw className={cn("h-3 w-3", isLoading && "animate-spin")} />
                     <span>Last updated {lastUpdated}</span>
-                </div>
+                </button>
             </CardContent>
         </Card>
     );
