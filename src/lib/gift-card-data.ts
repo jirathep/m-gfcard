@@ -6,6 +6,9 @@ export interface GiftCardData {
     imageUrl: string;
     dataAiHint: string;
     isPrimary?: boolean;
+    cardNumber: string;
+    importDate: string;
+    expiryDate: string;
 }
 
 export const giftCards: GiftCardData[] = [
@@ -17,6 +20,9 @@ export const giftCards: GiftCardData[] = [
     imageUrl: "https://placehold.co/600x380.png",
     dataAiHint: "flower bouquet",
     isPrimary: true,
+    cardNumber: '319000000',
+    importDate: '27 พฤษภาคม 2025',
+    expiryDate: '27 พฤษภาคม 2026',
   },
   {
     id: '2',
@@ -25,6 +31,9 @@ export const giftCards: GiftCardData[] = [
     thaiText: "มูลค่าสามร้อยบาท",
     imageUrl: "https://placehold.co/600x380.png",
     dataAiHint: "pink lotus",
+    cardNumber: '319000001',
+    importDate: '28 พฤษภาคม 2025',
+    expiryDate: '28 พฤษภาคม 2026',
   },
   {
     id: '3',
@@ -33,6 +42,9 @@ export const giftCards: GiftCardData[] = [
     thaiText: "มูลค่าหนึ่งร้อยบาท",
     imageUrl: "https://placehold.co/600x380.png",
     dataAiHint: "purple bellflower",
+    cardNumber: '319000002',
+    importDate: '29 พฤษภาคม 2025',
+    expiryDate: '29 พฤษภาคม 2026',
   },
 ];
 
