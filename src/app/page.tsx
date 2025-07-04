@@ -3,6 +3,7 @@ import { TransactionHistory } from "@/components/dashboard/transaction-history";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import { Copy, QrCode } from "lucide-react";
+import Link from "next/link";
 
 const ActionButton = ({ icon, label }: { icon: React.ReactNode, label: string }) => (
   <div className="flex flex-col items-center gap-2 text-center w-20">
@@ -41,7 +42,9 @@ export default function Home() {
 
         <div className="flex justify-center gap-8 py-4 mb-4">
           <ActionButton icon={<RedCardIcon withPlus className="scale-125"/>} label="Top up" />
-          <ActionButton icon={<RedCardIcon className="scale-125"/>} label="My Card" />
+          <Link href="/my-card">
+            <ActionButton icon={<RedCardIcon className="scale-125"/>} label="My Card" />
+          </Link>
         </div>
 
         <TransactionHistory />
