@@ -35,17 +35,7 @@ export function GiftCard({ value, valueText, thaiText, imageUrl, dataAiHint, isP
           <p className="font-light tracking-widest text-sm">GIFT CARD</p>
         </div>
         
-        <div className="flex-grow flex flex-col justify-center items-center -mt-8">
-            <p className="text-8xl font-thin tracking-tighter">{value}</p>
-            <div className="text-center -mt-2">
-              <p className="text-xs tracking-wider">{valueText}</p>
-              <p className="text-xs">{thaiText}</p>
-            </div>
-        </div>
-
-        <div className="self-start">
-            <LifeStoreLogo />
-        </div>
+       
       </div>
       {isPrimary && (
          <div className="absolute top-0 right-0 w-16 h-16 z-20 overflow-hidden">
