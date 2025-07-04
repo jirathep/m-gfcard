@@ -19,7 +19,7 @@ export const RedCardIcon = ({ withPlus = false, className = '' }: { withPlus?: b
 );
 
 
-export function BalanceCard({ balance }: { balance: number }) {
+export function BalanceCard({ balance, lastUpdated }: { balance: number, lastUpdated: string }) {
     const currentBalance = balance;
 
     return (
@@ -38,7 +38,7 @@ export function BalanceCard({ balance }: { balance: number }) {
                 </div>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground mt-4">
                     <RefreshCw className="h-3 w-3" />
-                    <span>Last updated today, 13:59</span>
+                    <span>Last updated {lastUpdated}</span>
                 </div>
             </CardContent>
         </Card>
