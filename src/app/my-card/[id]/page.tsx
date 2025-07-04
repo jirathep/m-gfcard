@@ -14,8 +14,8 @@ const DetailRow = ({ label, value }: { label: string; value: string }) => (
   </div>
 );
 
-export default function CardDetailPage({ params }: { params: { id: string } }) {
-  const card = getGiftCardById(params.id);
+export default async function CardDetailPage({ params }: { params: { id: string } }) {
+  const card = await getGiftCardById(params.id);
 
   if (!card) {
     notFound();

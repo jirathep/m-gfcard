@@ -11,43 +11,24 @@ export interface GiftCardData {
     expiryDate: string;
 }
 
-export const giftCards: GiftCardData[] = [
-  {
-    id: '1',
-    value: 1000,
-    valueText: "ONE THOUSAND BAHT",
-    thaiText: "มูลค่าหนึ่งพันบาท",
-    imageUrl: "https://pos.promptnow.com:13443/pos_pn/elephant/mcard/img/1000.png",
-    dataAiHint: "flower bouquet",
-    isPrimary: true,
-    cardNumber: '319000000',
-    importDate: '27 พฤษภาคม 2025',
-    expiryDate: '27 พฤษภาคม 2026',
-  },
-  {
-    id: '2',
-    value: 300,
-    valueText: "THREE HUNDRED BAHT",
-    thaiText: "มูลค่าสามร้อยบาท",
-    imageUrl: "https://pos.promptnow.com:13443/pos_pn/elephant/mcard/img/300.png",
-    dataAiHint: "pink lotus",
-    cardNumber: '319000001',
-    importDate: '28 พฤษภาคม 2025',
-    expiryDate: '28 พฤษภาคม 2026',
-  },
-  {
-    id: '3',
-    value: 100,
-    valueText: "ONE HUNDRED BAHT",
-    thaiText: "มูลค่าหนึ่งร้อยบาท",
-    imageUrl: "https://pos.promptnow.com:13443/pos_pn/elephant/mcard/img/100.png",
-    dataAiHint: "purple bellflower",
-    cardNumber: '319000002',
-    importDate: '29 พฤษภาคม 2025',
-    expiryDate: '29 พฤษภาคม 2026',
-  },
-];
+const API_URL = "https://pos.promptnow.com:13443/pos_pn/elephant/mcard/gift-card-data.php";
 
-export function getGiftCardById(id: string): GiftCardData | undefined {
-    return giftCards.find(card => card.id === id);
+export async function getGiftCards(): Promise<GiftCardData[]> {
+    try {
+        const response = await fetch(API_URL, { cache: 'no-store' });
+        if (!response.ok) {
+            console.error('Failed to fetch gift cards, status:', response.status);
+            return [];
+        }
+        const data = await response.json();
+        return data.cards || [];
+    } catch (error) {
+        console.error("Error fetching gift cards:", error);
+        return [];
+    }
+}
+
+export async function getGiftCardById(id: string): Promise<GiftCardData | undefined> {
+    const cards = await getGiftCards();
+    return cards.find(card => card.id === id);
 }

@@ -3,9 +3,20 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { GiftCard } from '@/components/my-card/gift-card';
 import { Button } from '@/components/ui/button';
-import { giftCards } from '@/lib/gift-card-data';
+import { getGiftCards, GiftCardData } from '@/lib/gift-card-data';
+import { useEffect, useState } from 'react';
 
 export default function MyCardPage() {
+  const [giftCards, setGiftCards] = useState<GiftCardData[]>([]);
+
+  useEffect(() => {
+    async function loadGiftCards() {
+      const cards = await getGiftCards();
+      setGiftCards(cards);
+    }
+    loadGiftCards();
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-sm shadow-sm">
