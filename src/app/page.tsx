@@ -65,8 +65,8 @@ export default function Home() {
         <AccountHeader accountId={accountId} />
       </header>
       
-      <main className="container mx-auto max-w-md -mt-24 px-4">
-        <div className="flex gap-4 items-stretch mb-6">
+      <main className="container mx-auto max-w-md -mt-24 px-4 space-y-4">
+        <div className="flex gap-4 items-stretch">
           <BalanceCard
             balance={balance}
             lastUpdated={lastUpdated}
@@ -80,7 +80,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-center gap-8 py-4 mb-4">
+        <div className="flex justify-center gap-8">
           <ActionButton icon={<RedCardIcon withPlus className="scale-125"/>} label="Top up" />
           <Link href="/my-card">
             <ActionButton icon={<RedCardIcon className="scale-125"/>} label="My Card" />
