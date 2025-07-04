@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { GiftCard } from '@/components/my-card/gift-card';
 import { giftCards } from '@/lib/gift-card-data';
+import { Button } from '@/components/ui/button';
 
 export default function MyCardPage() {
   return (
@@ -18,16 +19,21 @@ export default function MyCardPage() {
       <main className="container mx-auto max-w-md p-4">
         <div className="space-y-6">
           {giftCards.map((card) => (
-            <Link href={`/my-card/${card.id}`} key={card.id}>
-              <GiftCard
-                value={card.value}
-                valueText={card.valueText}
-                thaiText={card.thaiText}
-                imageUrl={card.imageUrl}
-                dataAiHint={card.dataAiHint}
-                isPrimary={card.isPrimary}
-              />
-            </Link>
+            <div key={card.id}>
+              <Link href={`/my-card/${card.id}`}>
+                <GiftCard
+                  value={card.value}
+                  valueText={card.valueText}
+                  thaiText={card.thaiText}
+                  imageUrl={card.imageUrl}
+                  dataAiHint={card.dataAiHint}
+                  isPrimary={card.isPrimary}
+                />
+              </Link>
+              <Button variant="destructive" className="w-full mt-2">
+                Delete
+              </Button>
+            </div>
           ))}
         </div>
       </main>
