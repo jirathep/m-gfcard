@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { GiftCard } from '@/components/my-card/gift-card';
 import { giftCards } from '@/lib/gift-card-data';
-import { Button } from '@/components/ui/button';
 
 export default function MyCardPage() {
   return (
@@ -19,7 +18,7 @@ export default function MyCardPage() {
       <main className="container mx-auto max-w-md p-4">
         <div className="space-y-6">
           {giftCards.map((card) => (
-            <div key={card.id} className="space-y-3">
+            <Link href={`/my-card/${card.id}`} key={card.id}>
               <GiftCard
                 value={card.value}
                 valueText={card.valueText}
@@ -28,12 +27,7 @@ export default function MyCardPage() {
                 dataAiHint={card.dataAiHint}
                 isPrimary={card.isPrimary}
               />
-               <Link href={`/my-card/${card.id}`}>
-                <Button variant="outline" className="w-full bg-white">
-                  View Details
-                </Button>
-              </Link>
-            </div>
+            </Link>
           ))}
         </div>
       </main>
