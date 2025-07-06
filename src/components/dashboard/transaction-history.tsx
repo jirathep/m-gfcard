@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Image from 'next/image';
 import { RedCardIcon } from "./balance-card";
 import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link';
 
 interface Transaction {
     id: string;
@@ -63,7 +64,9 @@ export function TransactionHistory() {
         <div className="space-y-4">
             <div className="flex justify-between items-center">
                 <h2 className="text-lg font-bold text-gray-900">Transaction History</h2>
-                <Button variant="link" className="text-primary font-semibold">View all</Button>
+                <Link href="/transaction-history">
+                    <Button variant="link" className="text-primary font-semibold">View all</Button>
+                </Link>
             </div>
             <div className="text-sm font-medium text-gray-500">Today</div>
             <div className="space-y-3">
