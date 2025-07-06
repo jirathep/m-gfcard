@@ -7,6 +7,7 @@ import { GiftCard } from '@/components/my-card/gift-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Toaster } from '@/components/ui/toaster';
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { TopUpConfirmationDialog } from '@/components/my-card/top-up-confirmation-dialog';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -36,12 +37,14 @@ const CardDetailSkeleton = () => (
     </div>
 );
 
-export default function CardDetailPage({ params }: { params: { id: string } }) {
+export default function CardDetailPage() {
+  const params = useParams<{ id: string }>();
   const [card, setCard] = useState<GiftCardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCard() {
+      if (!params.id) return;
       setIsLoading(true);
       const cardData = await getGiftCardById(params.id);
       setCard(cardData || null);
