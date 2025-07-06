@@ -72,9 +72,11 @@ export function TransactionHistory() {
                         <TransactionSkeleton />
                         <TransactionSkeleton />
                         <TransactionSkeleton />
+                        <TransactionSkeleton />
+                        <TransactionSkeleton />
                     </>
                 ) : (
-                    transactions.map((transaction) => (
+                    transactions.slice(0, 5).map((transaction) => (
                         <Card key={transaction.id} className="shadow-sm rounded-2xl hover:shadow-md transition-shadow">
                             <CardContent className="p-3 flex items-center gap-4">
                                 <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden">
