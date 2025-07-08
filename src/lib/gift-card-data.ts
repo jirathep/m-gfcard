@@ -15,7 +15,7 @@ const API_URL = "https://pos.promptnow.com:13443/pos_pn/elephant/mcard/gift-card
 
 export async function getGiftCards(): Promise<GiftCardData[]> {
     try {
-        const response = await fetch(API_URL, { cache: 'no-store' });
+        const response = await fetch(API_URL);
         if (!response.ok) {
             console.error('Failed to fetch gift cards, status:', response.status);
             return [];
