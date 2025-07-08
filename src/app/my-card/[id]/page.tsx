@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
-import { getGiftCardById, GiftCardData } from '@/lib/gift-card-data';
+import { getGiftCardById, getGiftCards, GiftCardData } from '@/lib/gift-card-data';
 import { GiftCard } from '@/components/my-card/gift-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Toaster } from '@/components/ui/toaster';
@@ -10,6 +10,14 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { TopUpConfirmationDialog } from '@/components/my-card/top-up-confirmation-dialog';
 import { Skeleton } from '@/components/ui/skeleton';
+
+export async function generateStaticParams() {
+  const cards = await getGiftCards();
+  if (!cards) return [];
+  return cards.map((card) => ({
+    id: card.id.toString(),
+  }));
+}
 
 const DetailRow = ({ label, value }: { label: string; value: string }) => (
   <div className="flex justify-between items-center text-sm">
