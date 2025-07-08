@@ -1,4 +1,3 @@
-'use client';
 
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
@@ -6,10 +5,7 @@ import { getGiftCardById, getGiftCards, GiftCardData } from '@/lib/gift-card-dat
 import { GiftCard } from '@/components/my-card/gift-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Toaster } from '@/components/ui/toaster';
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 import { TopUpConfirmationDialog } from '@/components/my-card/top-up-confirmation-dialog';
-import { Skeleton } from '@/components/ui/skeleton';
 
 export async function generateStaticParams() {
   const cards = await getGiftCards();
@@ -26,41 +22,8 @@ const DetailRow = ({ label, value }: { label: string; value: string }) => (
   </div>
 );
 
-const CardDetailSkeleton = () => (
-    <div className="space-y-6">
-        <Skeleton className="w-full aspect-[3/1.9] rounded-2xl" />
-        <Card className="shadow-lg rounded-2xl">
-            <CardContent className="p-6 space-y-4">
-                <div className="text-center space-y-2">
-                    <Skeleton className="h-4 w-1/4 mx-auto" />
-                    <Skeleton className="h-9 w-1/2 mx-auto" />
-                </div>
-                <div className="space-y-4 pt-2">
-                    <Skeleton className="h-5 w-full" />
-                    <Skeleton className="h-5 w-full" />
-                    <Skeleton className="h-5 w-full" />
-                </div>
-            </CardContent>
-        </Card>
-    </div>
-);
-
-export default function CardDetailPage() {
-  const params = useParams<{ id: string }>();
-  const [card, setCard] = useState<GiftCardData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchCard() {
-      if (!params.id) return;
-      setIsLoading(true);
-      const cardData = await getGiftCardById(params.id);
-      setCard(cardData || null);
-      setIsLoading(false);
-    }
-    fetchCard();
-  }, [params.id]);
-
+export default async function CardDetailPage({ params }: { params: { id: string } }) {
+  const card = await getGiftCardById(params.id);
 
   return (
     <div className="min-h-screen bg-gray-100 font-sans flex flex-col">
@@ -74,9 +37,7 @@ export default function CardDetailPage() {
       </header>
 
       <main className="flex-grow container mx-auto max-w-md p-4 space-y-6 pb-28">
-        {isLoading ? (
-            <CardDetailSkeleton />
-        ) : !card ? (
+        {!card ? (
             <p className="text-center text-gray-500 py-10">Card not found.</p>
         ) : (
           <>
@@ -109,7 +70,7 @@ export default function CardDetailPage() {
         )}
       </main>
 
-      {!isLoading && card && (
+      {card && (
         <footer className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-sm border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
            <div className="container mx-auto max-w-md p-4">
              <TopUpConfirmationDialog />
