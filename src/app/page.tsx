@@ -26,7 +26,13 @@ interface AccountData {
 
 async function getAccountData(): Promise<AccountData> {
   try {
-    const response = await fetch("https://dev2.promptnow.com:21172/account", { cache: 'no-store' });
+    const response = await fetch("https://dev2.promptnow.com:21172/account", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store' 
+    });
     if (!response.ok) {
         console.error('Failed to fetch account data, status:', response.status);
         return { "account-id": 'Loading...', balance: 0, datetime: '...' };
