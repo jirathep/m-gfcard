@@ -31,6 +31,7 @@ async function getAccountData(): Promise<AccountData> {
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ "session-id": "1234" }),
       cache: 'no-store' 
     });
     if (!response.ok) {
