@@ -79,7 +79,7 @@ export default function TransactionHistoryPage() {
         const fetchTransactions = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch("https://pos.promptnow.com:13443/pos_pn/elephant/mcard/transaction-history.php", { cache: 'no-store' });
+                const response = await fetch("https://dev2.promptnow.com:21172/transaction-history", { cache: 'no-store' });
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }

@@ -36,7 +36,7 @@ async function getAccountData(): Promise<AccountData> {
     });
     if (!response.ok) {
         console.error('Failed to fetch account data, status:', response.status);
-        return { "account-id": 'Loading...', balance: 0, datetime: '...' };
+        return { "account-id": 'Loading...'+response.statusText, balance: 0, datetime: '...' };
     }
     const data = await response.json();
     return data;
