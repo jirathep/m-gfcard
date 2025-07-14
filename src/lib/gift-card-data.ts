@@ -11,11 +11,18 @@ export interface GiftCardData {
     expiryDate: string;
 }
 
-const API_URL = "https://pos.promptnow.com:13443/pos_pn/elephant/mcard/gift-card-data.php";
+const API_URL = "https://dev2.promptnow.com:21172/gift-card-data";
 
 export async function getGiftCards(): Promise<GiftCardData[]> {
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "account-id": "123451234512346" }),
+            cache: 'no-store' 
+          });
         if (!response.ok) {
             console.error('Failed to fetch gift cards, status:', response.status);
             return [];
