@@ -21,7 +21,6 @@ export async function getGiftCards(): Promise<GiftCardData[]> {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ "account-id": "123451234512346" }),
-            cache: 'no-store' 
           });
         if (!response.ok) {
             console.error('Failed to fetch gift cards, status:', response.status);
